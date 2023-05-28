@@ -77,6 +77,7 @@ function appendMessageByLabel(messagesByLabel, label, message) {
     let messages = messagesByLabel.get(label)
     messagesByLabel.set(label, messages + "\n* " + message)
   }
+  console.log('Added message to label', messagesByLabel)
 }
 
 function capitalize(string) {
