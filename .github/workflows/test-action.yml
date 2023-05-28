@@ -17,3 +17,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           labels: breaking,fixes
           titles: BREAKING,FIXES
+      - name: Just echo something
+        run: echo "Anything "
