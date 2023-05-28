@@ -1,4 +1,4 @@
-on: [push]
+on: [pull_request]
 
 jobs:
   hello_world_job:
@@ -12,8 +12,8 @@ jobs:
         # You have to update this with your branch when developing. 
         #   It doesn't look like you can use env, steps, or github contexts
         #   for a uses:
-        uses: daytime-em/release-notes-on-pr@main
+        uses: sanketnaik99/changelog-on-pr@main
         with:
-          pull_number: 12
           token: ${{ secrets.GITHUB_TOKEN }}
           labels: breaking,fixes
+          titles: BREAKING,FIXES
