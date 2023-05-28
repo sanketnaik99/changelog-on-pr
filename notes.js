@@ -18,6 +18,10 @@ function getHeadingLabels() {
   return core.getInput('labels').split(',')
 }
 
+function getHeadingTitles() {
+  return core.getInput('titles').split(',')
+}
+
 async function labelsOnPr(pull_number) {
   try {
     let pr = await octokit.rest.pulls.get({
@@ -77,7 +81,6 @@ function appendMessageByLabel(messagesByLabel, label, message) {
     let messages = messagesByLabel.get(label)
     messagesByLabel.set(label, messages + "\n* " + message)
   }
-  console.log('Added message to label', messagesByLabel)
 }
 
 function capitalize(string) {
@@ -116,12 +119,12 @@ async function createChangeList(commitMessages) {
   var body = ""
 
   // Add each category based on the inputs
-  for (const key of getHeadingLabels()) {
+  for (const key of getHeadingTitles()) {
     let value = changes.get(key)
     body += formattedCategory(key, value)
   }
   // If Improvements wasn't an input (affects heading order) then add it at the end for unlabeled changes
-  if (!getHeadingLabels().includes("improvements")) {
+  if (!getHeadingTitles().includes("improvements")) {
     body += formattedCategory("improvements", changes.get("improvements"))
   }
 
