@@ -51,6 +51,7 @@ async function changesByLabel(commitMessages) {
       let prLabels = await labelsOnPr(commitMsg.match(/#(\d+)/)[1])
       prLabels.forEach(prLabel => {
         if (headingLabels.includes(prLabel)) {
+          console.log('PR Label for this PR', prLabel)
           let titleIndex = headingLabels.findIndex(prLabel)
           let title = titleIndex === -1? "improvements": headingTitles[titleIndex]
           appendMessageByLabel(messagesByLabel, prLabel, commitMsg)
