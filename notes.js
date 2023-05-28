@@ -55,10 +55,8 @@ async function changesByLabel(commitMessages) {
       let prLabels = await labelsOnPr(commitMsg.match(/#(\d+)/)[1])
       prLabels.forEach(prLabel => {
         if (headingLabels.includes(prLabel)) {
-          console.log('PR Label for this PR', prLabel)
           let titleIndex = headingLabels.findIndex(item => item === prLabel)
           let title = titleIndex === -1? "improvements": headingTitles[titleIndex]
-          console.log('Title for this PR', title)
           appendMessageByLabel(messagesByLabel, title, commitMsg)
           added = true
         }
@@ -98,10 +96,8 @@ function fetchCoAuthors(commits) {
         // Name Name Name <example@users.noreply.github.com>
         let emails = line.match(/Co-authored-by:.*<(.*)>/)
         if (emails[1]) {
-          console.log('emails[1]', emails[1], 'emails[0]', emails[0])
           linesByEmail.set(emails[1], emails[0])
         } else {
-          console.log('line', line)
           linesByEmail.set(line, line)
         }
       })
@@ -111,7 +107,6 @@ function fetchCoAuthors(commits) {
   let coAuthorLine = author => `${author.name}` 
   commits.map(el => el.author).forEach(it => linesByEmail.set(it.email, coAuthorLine(it)))
   commits.map(el => el.committer).forEach(it => linesByEmail.set(it.email, coAuthorLine(it)))
-  console.log('linesByEmail', linesByEmail.values())
   return Array.from(linesByEmail.values()).filter(item => item !== 'GitHub').join(", ")
 }
 
