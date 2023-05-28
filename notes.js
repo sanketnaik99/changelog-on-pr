@@ -98,8 +98,10 @@ function fetchCoAuthors(commits) {
         // Name Name Name <example@users.noreply.github.com>
         let emails = line.match(/Co-authored-by:.*<(.*)>/)
         if (emails[1]) {
+          console.log('emails[1]', emails[1], 'emails[0]', emails[0])
           linesByEmail.set(emails[1], emails[0])
         } else {
+          console.log('line', line)
           linesByEmail.set(line, line)
         }
       })
@@ -161,7 +163,7 @@ async function main() {
 
   let changeList = await createChangeList(commitMessages)
   let coAuthorsList = fetchCoAuthors(commits.map(el => el.commit))
-  let changelog = changeList + "\n\n" + "#Contributors\n" + coAuthorsList
+  let changelog = changeList + "\n\n" + "# Contributors\n" + coAuthorsList
 
   console.log("Adding Changelog:\n" + changelog)
 
