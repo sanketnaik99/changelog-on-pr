@@ -12,6 +12,10 @@ inputs:
     description: "A comma-delimited list of labels that should be used as headings. If none are provided, changes will be labeled as 'Improvements'"
     required: false
     default: ""
+  titles:
+    description: "A comma-delimited list of custom titles that match the labels. These titles will be used as headings for their respective labels"
+    required: false
+    default: ""
 runs:
   using: 'node16'
   main: 'notes.js'
