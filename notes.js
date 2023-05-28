@@ -112,7 +112,7 @@ function fetchCoAuthors(commits) {
   commits.map(el => el.author).forEach(it => linesByEmail.set(it.email, coAuthorLine(it)))
   commits.map(el => el.committer).forEach(it => linesByEmail.set(it.email, coAuthorLine(it)))
   console.log('linesByEmail', linesByEmail.values())
-  return Array.from(linesByEmail.values()).filter(item => item !== 'Github').join(", ")
+  return Array.from(linesByEmail.values()).filter(item => item !== 'GitHub').join(", ")
 }
 
 async function createChangeList(commitMessages) {
