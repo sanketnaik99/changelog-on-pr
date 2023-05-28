@@ -15,5 +15,6 @@ jobs:
           pull_number: 12
           token: ${{ secrets.GITHUB_TOKEN }}
           labels: fixes,breaking
+          titles: FIXES,BREAKING
       - name: Just echo something
         run: echo "Anything "

@@ -27,6 +27,11 @@ async function labelsOnPr(pull_number) {
 async function changesByLabel(commitMessages) {
   var messagesByLabel = new Map() // label:[message1, message2, ...]
   let headingLabels = core.getInput('labels').split(',')
+  let headingTitles = core.getInput('titles').split(',')
+
+  if (headingLabels.length !== headingTitles.length) {
+    throw new Error('The number of labels and titles do not match')
+  }
 
   commitMessages.forEach(async commitMsg => {
     var added = false
@@ -42,6 +47,8 @@ async function changesByLabel(commitMessages) {
 ////////
       prLabels.forEach(prLabel => {
         if (headingLabels.includes(prLabel)) {
+          let titleIndex = headingLabels.findIndex(prLabel)
+          let title = titleIndex === -1? "improvements": headingTitles[titleIndex]
           appendMessageByLabel(messagesByLabel, prLabel, commitMsg)
           added = true
         }
