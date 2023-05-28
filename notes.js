@@ -54,7 +54,7 @@ async function changesByLabel(commitMessages) {
           console.log('PR Label for this PR', prLabel)
           let titleIndex = headingLabels.findIndex(item => item === prLabel)
           let title = titleIndex === -1? "improvements": headingTitles[titleIndex]
-          appendMessageByLabel(messagesByLabel, prLabel, commitMsg)
+          appendMessageByLabel(messagesByLabel, title, commitMsg)
           added = true
         }
       })
