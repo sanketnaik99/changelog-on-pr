@@ -50,7 +50,7 @@ async function changesByLabel(commitMessages) {
   var messagesByLabel = new Map() // label:[message1, message2, ...]
   let headingLabels = core.getInput('labels').split(',')
   let headingTitles = core.getInput('titles').split(',')
-  let commitMessageFilters = core.getInput('filters').split(',')
+  let commitMessageFilters = core.getInput('filters').split(',').filter(Boolean)
   console.log('Filters', commitMessageFilters)
   if (headingLabels.length !== headingTitles.length) {
     throw new Error('The number of labels and titles do not match')
