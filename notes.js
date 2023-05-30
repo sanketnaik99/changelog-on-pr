@@ -55,7 +55,7 @@ async function changesByLabel(commitMessages) {
   if (headingLabels.length !== headingTitles.length) {
     throw new Error('The number of labels and titles do not match')
   }
-  let filteredCommitMessage = ''
+  let filteredCommitMessage = commitMsg
   for (const commitMsg of commitMessages) {
     var added = false
     if (commitMessageFilters.length > 0) {
@@ -81,7 +81,7 @@ async function changesByLabel(commitMessages) {
 
     // unlabeled changes should be called 'improvements'
     if (!added) {
-      appendMessageByLabel(messagesByLabel, "improvements", commitMsg)
+      appendMessageByLabel(messagesByLabel, "improvements", filteredCommitMessage)
     }
   } // for (... of commitMessages)
 
