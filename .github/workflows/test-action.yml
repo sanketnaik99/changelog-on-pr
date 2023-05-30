@@ -17,5 +17,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           labels: breaking,fixes
           titles: Fixes 🔧,Breaking Changes
+          filters: MKT - ,WFM - ,
       - name: Just echo something
         run: echo "Anything "
