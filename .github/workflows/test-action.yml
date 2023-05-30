@@ -7,6 +7,11 @@ jobs:
     steps:
       - name: Warn them
         run: echo "WARNING! You have to manually set which branch to test. If you don't, you'll be testing main. Sorry about that"
+      - name: Clear PR Description
+        uses: riskledger/update-pr-description@v2
+        with:
+          body: 'This release includes the following changes -' # Clear PR description before adding a new one
+          token: ${{ secrets.GITHUB_TOKEN }}  
       - name: Generate some release notes
         id: notes
         # You have to update this with your branch when developing. 

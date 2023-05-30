@@ -21,6 +21,10 @@ inputs:
     description: "A comma-delimited list of custom titles that match the labels. These titles will be used as headings for their respective labels"
     required: false
     default: ""
+  filters:
+    description: 'A comma-delimited list of labels that should be filtered out before adding commit messages to the changelog'
+    required: false
+    default: ""
 runs:
   using: 'node16'
   main: 'notes.js'

@@ -22,6 +22,14 @@ function getHeadingTitles() {
   return core.getInput('titles').split(',')
 }
 
+function extractName(text) {
+  const match = /^Co-authored-by: (.*) <.*$/.exec(text);
+  if (match) {
+    return match[1];
+  }
+  return undefined;
+}
+
 async function labelsOnPr(pull_number) {
   try {
     let pr = await octokit.rest.pulls.get({
@@ -42,13 +50,21 @@ async function changesByLabel(commitMessages) {
   var messagesByLabel = new Map() // label:[message1, message2, ...]
   let headingLabels = core.getInput('labels').split(',')
   let headingTitles = core.getInput('titles').split(',')
+  let commitMessageFilters = core.getInput('filters').split(',')
 
   if (headingLabels.length !== headingTitles.length) {
     throw new Error('The number of labels and titles do not match')
   }
-
+  let filteredCommitMessage = ''
   for (const commitMsg of commitMessages) {
     var added = false
+    if (commitMessageFilters.length > 0) {
+      for (const filter of commitMessageFilters){
+        if (commitMsg.startsWith(filter)){
+          filteredCommitMessage = commitMsg.replace(filter, '')
+        }
+      }
+    }
 
     // If there's a reference to a pull request
     if (commitMsg.match(/#\d+/)) {
@@ -57,7 +73,7 @@ async function changesByLabel(commitMessages) {
         if (headingLabels.includes(prLabel)) {
           let titleIndex = headingLabels.findIndex(item => item === prLabel)
           let title = titleIndex === -1? "improvements": headingTitles[titleIndex]
-          appendMessageByLabel(messagesByLabel, title, commitMsg)
+          appendMessageByLabel(messagesByLabel, title, filteredCommitMessage)
           added = true
         }
       })
@@ -96,9 +112,9 @@ function fetchCoAuthors(commits) {
         // Name Name Name <example@users.noreply.github.com>
         let emails = line.match(/Co-authored-by:.*<(.*)>/)
         if (emails[1]) {
-          linesByEmail.set(emails[1], emails[0])
+          linesByEmail.set(emails[1], extractName(emails[0]))
         } else {
-          linesByEmail.set(line, line)
+          linesByEmail.set(line, extractName(line))
         }
       })
   }
