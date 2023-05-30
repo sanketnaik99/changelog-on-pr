@@ -55,8 +55,8 @@ async function changesByLabel(commitMessages) {
   if (headingLabels.length !== headingTitles.length) {
     throw new Error('The number of labels and titles do not match')
   }
-  let filteredCommitMessage = commitMsg
   for (const commitMsg of commitMessages) {
+    let filteredCommitMessage = commitMsg
     var added = false
     if (commitMessageFilters.length > 0) {
       for (const filter of commitMessageFilters){
