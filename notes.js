@@ -51,7 +51,7 @@ async function changesByLabel(commitMessages) {
   let headingLabels = core.getInput('labels').split(',')
   let headingTitles = core.getInput('titles').split(',')
   let commitMessageFilters = core.getInput('filters').split(',')
-
+  console.log('Filters', commitMessageFilters)
   if (headingLabels.length !== headingTitles.length) {
     throw new Error('The number of labels and titles do not match')
   }
@@ -61,6 +61,7 @@ async function changesByLabel(commitMessages) {
     if (commitMessageFilters.length > 0) {
       for (const filter of commitMessageFilters){
         if (commitMsg.startsWith(filter)){
+          console.log('Found match', commitMsg, filter)
           filteredCommitMessage = commitMsg.replace(filter, '')
         }
       }
