@@ -173,7 +173,7 @@ async function main() {
 
   let changeList = await createChangeList(commitMessages)
   let coAuthorsList = fetchCoAuthors(commits.map(el => el.commit))
-  let changelog = changeList + "\n\n" + "# Contributors\n" + coAuthorsList
+  let changelog = changeList + "\n\n" + "## Contributors\n" + coAuthorsList
 
   console.log("Adding Changelog:\n" + changelog)
 
