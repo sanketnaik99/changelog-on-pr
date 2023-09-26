@@ -60,7 +60,9 @@ async function changesByLabel(commitMessages) {
     if (commitMessageFilters.length > 0) {
       for (const filter of commitMessageFilters){
         if (commitMsg.startsWith(filter)){
+          console.log(commitMsg, " starts with ", filter);
           filteredCommitMessage = commitMsg.replace(filter, '')
+          console.log("filteredCommitMessage: ", filteredCommitMessage)
         }
       }
     }
