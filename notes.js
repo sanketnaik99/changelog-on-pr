@@ -62,9 +62,7 @@ async function changesByLabel(commitMessages) {
         const normalizedCommitMsg = commitMsg.replace(/\u00A0/g, ' ');
         const normalizedFilter = filter.replace(/\u00A0/g, ' ');
         if (normalizedCommitMsg.startsWith(normalizedFilter)){
-          console.log(commitMsg, " starts with", filter);
           filteredCommitMessage = normalizedCommitMsg.replace(normalizedFilter, '')
-          console.log("filteredCommitMessage: ", filteredCommitMessage)
         }
       }
     }
