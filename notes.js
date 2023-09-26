@@ -58,9 +58,10 @@ async function changesByLabel(commitMessages) {
     let filteredCommitMessage = commitMsg
     var added = false
     if (commitMessageFilters.length > 0) {
+      console.log({'filter': filter, 'commitMessage': commitMsg});
       for (const filter of commitMessageFilters){
         if (commitMsg.startsWith(filter)){
-          console.log(commitMsg, " starts with ", filter);
+          console.log(commitMsg, " starts with", filter);
           filteredCommitMessage = commitMsg.replace(filter, '')
           console.log("filteredCommitMessage: ", filteredCommitMessage)
         }
