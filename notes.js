@@ -59,11 +59,14 @@ async function changesByLabel(commitMessages) {
     var added = false
     if (commitMessageFilters.length > 0) {
       for (const filter of commitMessageFilters){
-        console.log({'filter': filter, 'commitMessage': commitMsg});
+        // console.log({'filter': filter, 'commitMessage': commitMsg});
         if (commitMsg.startsWith(filter)){
-          console.log(commitMsg, " starts with", filter);
+          // console.log(commitMsg, " starts with", filter);
           filteredCommitMessage = commitMsg.replace(filter, '')
           console.log("filteredCommitMessage: ", filteredCommitMessage)
+        }
+        if (commitMsg.contains(filter)){
+          console.log(commitMsg, " contains", filter);
         }
       }
     }
