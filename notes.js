@@ -59,14 +59,18 @@ async function changesByLabel(commitMessages) {
     var added = false
     if (commitMessageFilters.length > 0) {
       for (const filter of commitMessageFilters){
-        console.log({'filter': filter, 'commitMessage': commitMsg});
         if (commitMsg.startsWith(filter)){
           // console.log(commitMsg, " starts with", filter);
           filteredCommitMessage = commitMsg.replace(filter, '')
           console.log("filteredCommitMessage: ", filteredCommitMessage)
         }
-        if (commitMsg.includes(filter)){
-          console.log(commitMsg, " contains", filter);
+        if (filter === 'MKT - '){
+          for (let i = 0; i < commitMsg.length; i++) {
+            console.log({'Char': commitMsg.charAt(i), 'Code': commitMsg.charCodeAt(i)});
+          }
+          for (let i = 0; i < filter.length; i++){
+            console.log({'Char': filter.charAt(i), 'Code': filter.charCodeAt(i)});
+          }
         }
       }
     }
