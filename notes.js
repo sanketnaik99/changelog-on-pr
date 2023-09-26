@@ -65,9 +65,9 @@ async function changesByLabel(commitMessages) {
           filteredCommitMessage = commitMsg.replace(filter, '')
           console.log("filteredCommitMessage: ", filteredCommitMessage)
         }
-        if (commitMsg.contains(filter)){
-          console.log(commitMsg, " contains", filter);
-        }
+        // if (commitMsg.contains(filter)){
+        //   console.log(commitMsg, " contains", filter);
+        // }
       }
     }
 
